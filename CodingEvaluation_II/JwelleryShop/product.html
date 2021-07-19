@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product</title>
+        <style>
+            .container{
+                background-color: wheat;
+            }
+            #product{
+                display:grid;
+                grid-gap: 3%;
+                margin: 2%;
+                grid-template-columns: repeat(4,20%);
+            }
+            #filter{
+                background-color:gray;
+                width: 100%;
+                height: 30px;
+            }
+            #filter_a{
+                width: 50%;
+                height: 30px;
+                float: left;
+            }
+            #filter_b{
+                width: 50%;
+                height: 30px;
+                float: left;
+            }
+            #btn
+            {
+                background-color: maroon;
+                color:white;
+                text-decoration: none;
+                font-size: 20px;
+                width: 200px;
+                height: 30px;
+            }
+            a{
+                color:white;
+                font-weight: 700px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="conatiner">
+            <h1 style="text-align:center;">Jwellery Store</h1>
+            <div id="filter">
+                <div id="filter_a">
+                    <button onclick="sortAZ()">Sort A to Z</button>
+                    <button onclick="sortZA()">Sort Z to A</button>
+                </div>
+                <div id="filter_b">
+                    <button onclick="sortLH()">Low to High</button>
+                    <button onclick="sortHL()">High to Low</button>
+                </div>
+            </div>
+            <div>
+                <button id="btn"><a href="cart.html">View Cart</a></button>
+            </div>
+            <div id="product">
+
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    const product =[
+    {name:"Samsung",
+        price:"10000",
+        image:"https://via.placeholder.com/140x100"
+    },
+    {name:"Note 5",
+        price:"6000",
+        image:"https://via.placeholder.com/140x100"
+    },
+    {name:"Redmi 4A",
+        price:"7000",
+        image:"https://via.placeholder.com/140x100"
+    },
+    {name:"Realme 2S",
+        price:"12000",
+        image:"https://via.placeholder.com/140x100"
+    },
+    {name:"Realme 5",
+        price:"11000",
+        image:"https://via.placeholder.com/140x100"
+    },
+    {name:"Oppo 5s",
+        price:"13000",
+        image:"https://via.placeholder.com/140x100"
+    },
+    {name:"Redmi 8",
+        price:"10000",
+        image:"https://via.placeholder.com/140x100"
+    },
+    {name:"Samsung M20",
+        price:"15000",
+        image:"https://via.placeholder.com/140x100"
+    },
+    {name:"Redmi 5A",
+        price:"8000",
+        image:"https://via.placeholder.com/140x100",
+    },
+    {name:"Realme 6",
+        price:"16000",
+        image:"https://via.placeholder.com/140x100"
+    }
+];
+//store data
+if(localStorage.getItem("product")==null)
+{
+    localStorage.setItem("product",JSON.stringify(product));
+}
+function showProduct(prdata)
+{
+    let product_data = prdata;
+    let productdiv= document.getElementById("product");
+    productdiv.innerHTML=null;
+    product_data.forEach(function(el){
+         let div = document.createElement("div");
+
+        let prImage = document.createElement("img");
+        prImage.src=el.image;
+        prImage.style.width="200px";
+        prImage.style.height="200px";
+        
+        let prname = document.createElement("p");
+        prname.style.fontSize="20px";
+        prname.style.color="maroon";
+        prname.textContent=el.name;
+
+        let prprice = document.createElement("p");
+        prprice.textContent=el.price
+
+        let btn = document.createElement("button");
+        btn.textContent="Add to Cart";
+        btn.addEventListener("click",function(){
+        addcart(el);
+    })
+        productdiv.append(div);
+        div.append(prImage,prname,prprice,btn);
+    });
+};
+function sortAZ(){
+    let product_data = JSON.parse(localStorage.getItem('product'));
+    product_data = product.sort(function(a,b){
+    return a.name - b.name;
+    
+    });
+    showProduct(product_data);
+}
+function sortZA(){
+    let product_data = JSON.parse(localStorage.getItem('product'));
+    product_data = product.sort(function(a,b){
+    return b.name-a.name;
+    
+    });
+    showProduct(product_data);
+}
+function sortLH(){
+    let product_data = JSON.parse(localStorage.getItem('product'));
+    product_data = product.sort(function(a,b){
+    return a.price-b.price;
+    
+    });
+    showProduct(product_data);
+
+}
+function sortHL(){
+    let product_data = JSON.parse(localStorage.getItem('product'));
+    product_data = product.sort(function(a,b){
+    return b.price-a.price;
+    
+    });
+    showProduct(product_data);
+}
+showProduct(JSON.parse(localStorage.getItem('product')));
+function addcart(obj)
+{
+    let JwelleryCart = localStorage.getItem("jcart");
+    if(JwelleryCart===null)
+    {
+        JwelleryCart=[];
+    }
+    else
+    {
+        JwelleryCart = JSON.parse(localStorage.getItem("jcart"));
+    }
+    JwelleryCart.push(obj);
+    localStorage.setItem("jcart",JSON.stringify(JwelleryCart));
+}
+</script>

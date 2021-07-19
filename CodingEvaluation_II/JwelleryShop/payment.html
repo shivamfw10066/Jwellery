@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Payment</title>
+        <style>
+            .container{
+                background-color:orange;
+                width: 40%;
+                height: 400px;
+                border:2px solid midnightblue;
+                margin:100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Fill Card Detail</h1>
+            <form>
+                Card No : <input type="number" id="cardnum"/><br/>
+                Expire Date : <select>
+                    <option>Month</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                </select>
+                <select>
+                    <option>Year</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                    <option>2026</option>
+                </select>
+                <br/>
+                CVV/CVC No : <input type="number" id="cvc"/>
+                <br/>
+                Card Holder Name : <input type="text" id="name"/>
+                <br/>
+                <button>Get OTP</button>
+                <input type="text" id="OTP"/>
+                <button><a href="confirmation.html">Submit</a></button>
+            </form>
+        </div>
+    </body>
+</html>

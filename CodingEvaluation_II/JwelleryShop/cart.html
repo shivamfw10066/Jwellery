@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jwellery</title>
+        <style>
+            .class{
+                background-color:wheat;
+                height: auto;
+                width: 100%;
+            }
+            #viewcart{
+                display:grid;
+                grid-template-columns: repeat(4,20%);
+                grid-gap:3%;
+                margin: 3%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>View Cart</h1>
+        <div class="conatiner">
+            <div id="viewcart">
+
+            </div>
+            <div>
+                <form id="myForm">
+                    <input type="text" name="code" id="code"/>
+                    <button onclick="applyPromo()">Apply Code</button>
+                </form>
+                <button><a  href="payment.html">Goto Payment</a></button>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+function showcart(prdata)
+{
+    let product_data = prdata;
+    let productdiv= document.getElementById("viewcart");
+    productdiv.innerHTML=null;
+    product_data.forEach(function(el){
+         let div = document.createElement("div");
+
+        let prImage = document.createElement("img");
+        prImage.src=el.image;
+        prImage.style.width="200px";
+        prImage.style.height="200px";
+        
+        let prname = document.createElement("p");
+        prname.style.fontSize="20px";
+        prname.style.color="maroon";
+        prname.textContent=el.name;
+
+        let prprice = document.createElement("p");
+        prprice.textContent=el.price;
+        productdiv.append(div);
+        div.append(prImage,prname,prprice);
+    });
+};
+function applyPromo(e)
+{
+    e.preventDefault();
+    const form = document.getElementById("myForm");
+    const promo = document.getElementById("code");
+
+}
+showcart(JSON.parse(localStorage.getItem('jcart')));
+</script>
